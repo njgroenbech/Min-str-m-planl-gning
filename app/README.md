@@ -4,4 +4,5 @@
 
 This project attempts to create a new planning page for "Min Strøm", 
 where a user can plan which appliances, cars etc. should be charged at which point in time. 
-It also tracks the amount of money you can save based on your charging habits.
+It also tracks the amount of money you can save based on your charging habits. The app is being
+made as assignment by Philip Engberg and Anne Lundov, the team behind Min Strøm.
