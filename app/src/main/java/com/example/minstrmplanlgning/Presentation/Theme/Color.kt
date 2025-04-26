@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.ui.theme
+package com.example.minstrmplanlgning.Presentation.Theme
 
 import androidx.compose.ui.graphics.Color
 

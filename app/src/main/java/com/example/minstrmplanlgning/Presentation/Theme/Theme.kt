@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.ui.theme
+package com.example.minstrmplanlgning.Presentation.Theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

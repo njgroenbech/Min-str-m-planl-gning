@@ -1,11 +1,11 @@
-package com.example.minstrmplanlgning.ui.navigation
+package com.example.minstrmplanlgning.Presentation.Navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.minstrmplanlgning.ui.screens.HomeScreen
-import com.example.minstrmplanlgning.ui.screens.Screen2
+import com.example.minstrmplanlgning.Presentation.Components.HomeScreen
+import com.example.minstrmplanlgning.Presentation.Components.Screen2
 
 @Composable
 fun NavigateHomeAndScreen2 () {

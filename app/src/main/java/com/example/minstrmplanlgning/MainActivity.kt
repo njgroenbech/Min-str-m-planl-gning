@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.minstrmplanlgning.ui.navigation.NavigateHomeAndScreen2
+import com.example.minstrmplanlgning.Presentation.Navigation.NavigateHomeAndScreen2
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
