@@ -23,10 +23,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .size(30.dp)
                 )
-                Text(
-                    text = "Example of navigation between 2 screens",
-                    fontSize = 20.sp
-                )
                 NavigateHomeAndScreen2()
             }
         }
