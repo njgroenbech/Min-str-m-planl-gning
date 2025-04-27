@@ -3,24 +3,10 @@ package com.example.minstrmplanlgning.Presentation.Components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,62 +18,75 @@ import com.example.minstrmplanlgning.R
 
 @Composable
 fun HomeScreen(onScreen2ButtonClick: () -> Unit = {}) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column {
+    var showChooseDeviceSheet by remember { mutableStateOf(false) }
 
-            Spacer(modifier = Modifier.height(24.dp))
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = "Plan",
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Row {
                 Text(
-                    text = "I dag",
-                    fontSize = 32.sp,
-                    color = Color(0xFF3B82F6),
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 32.dp, end = 98.dp),
+                    text = "Plan",
+                    fontSize = 40.sp,
+                    fontWeight = FontWeight.Bold
                 )
-                Text(
-                    text = "Kalender",
-                    fontSize = 32.sp
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row {
+                    Text(
+                        text = "I dag",
+                        fontSize = 32.sp,
+                        color = Color(0xFF3B82F6),
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(start = 32.dp, end = 98.dp)
+                    )
+                    Text(
+                        text = "Kalender",
+                        fontSize = 32.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                BarChart()
+
+                ApplianceCard(
+                    applianceName = "Vaskemaskine",
+                    time = "14-17"
                 )
+
+                Spacer(modifier = Modifier.height(24.dp))
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            BarChart()
-
-            ApplianceCard(
-                applianceName = "Vaskemaskine",
-                time = "14-17"
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
+            Button(
+                onClick = { showChooseDeviceSheet = true },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF3B82F6),
+                    contentColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            ) {
+                Text(text = "TILFØJ APPARAT")
+            }
         }
 
-        Button(
-            onClick = { /* TODO: Tilføj funktion */ },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF3B82F6),
-                contentColor = Color.White
-            ),
-
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
-        ) {
-            Text(text = "TILFØJ APPARAT")
+        // BottomSheet visning
+        if (showChooseDeviceSheet) {
+            AddDevice(
+                onApplianceSelected = { appliance ->
+                    showChooseDeviceSheet = false
+                    // TODO: Naviger videre baseret på valgt apparat
+                },
+                onDismiss = { showChooseDeviceSheet = false }
+            )
         }
     }
 }
