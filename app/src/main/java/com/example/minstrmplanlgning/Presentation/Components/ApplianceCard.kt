@@ -1,6 +1,7 @@
 package com.example.minstrmplanlgning.Presentation.Components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,10 +22,14 @@ import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.R
 
 @Composable
-fun ApplianceCard(applianceName: String, time: String) {
+fun ApplianceCard
+            (applianceName: String,
+             time: String,
+             onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick () }
             .padding(vertical = 8.dp),
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
