@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun BottomNavigationBarUI() {
+fun NavigationBar() {
     val navItems = listOf(
         Pair("Priser", Icons.Default.Search),
         Pair("Forbrug", Icons.Default.Search),
