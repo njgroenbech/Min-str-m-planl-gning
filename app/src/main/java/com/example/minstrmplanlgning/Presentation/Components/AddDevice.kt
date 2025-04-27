@@ -1,11 +1,7 @@
 package com.example.minstrmplanlgning.Presentation.Components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.Image
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -14,15 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.R
+import com.example.minstrmplanlgning.domain.model.Appliance
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddDevice(
-    onApplianceSelected: (String) -> Unit,
+    onApplianceSelected: (Appliance) -> Unit,
     onDismiss: () -> Unit
 ) {
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -45,20 +41,45 @@ fun AddDevice(
 
             Column {
                 Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
-                    ApplianceButton(name = "Vaskemaskine", iconRes = R.drawable.image_1, onClick = { onApplianceSelected("vaskemaskine") })
-                    ApplianceButton(name = "Elbil", iconRes = R.drawable.image_4, onClick = { onApplianceSelected("elbil") })
+                    ApplianceButton(
+                        name = "Vaskemaskine",
+                        iconRes = R.drawable.image_2,
+                        onClick = { onApplianceSelected(Appliance(name = "Vaskemaskine", iconRes = R.drawable.image_2)) }
+                    )
+                    ApplianceButton(
+                        name = "Elbil",
+                        iconRes = R.drawable.image_4,
+                        onClick = { onApplianceSelected(Appliance(name = "Elbil", iconRes = R.drawable.image_4)) }
+                    )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
-                    ApplianceButton(name = "Ovn", iconRes = R.drawable.image_3, onClick = { onApplianceSelected("ovn") })
-                    ApplianceButton(name = "Mikroovn", iconRes = R.drawable.image_2, onClick = { onApplianceSelected("mikroovn") })
+                    ApplianceButton(
+                        name = "Ovn",
+                        iconRes = R.drawable.image_3,
+                        onClick = { onApplianceSelected(Appliance(name = "Ovn", iconRes = R.drawable.image_3)) }
+                    )
+                    ApplianceButton(
+                        name = "Mikroovn",
+                        iconRes = R.drawable.image_1,
+                        onClick = { onApplianceSelected(Appliance(name = "Mikroovn", iconRes = R.drawable.image_1)) }
+                    )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
-                    ApplianceButton(name = "Opvasker", iconRes = R.drawable.image_5, onClick = { onApplianceSelected("opvasker") })
-                    ApplianceButton(name = "Andet", iconRes = R.drawable.image_6, onClick = { onApplianceSelected("andet") })
+                    ApplianceButton(
+                        name = "Opvasker",
+                        iconRes = R.drawable.image_5,
+                        onClick = { onApplianceSelected(Appliance(name = "Opvasker", iconRes = R.drawable.image_5)) }
+                    )
+                    ApplianceButton(
+                        name = "Andet",
+                        iconRes = R.drawable.image_6,
+                        onClick = { onApplianceSelected(Appliance(name = "Andet", iconRes = R.drawable.image_6)) }
+                    )
                 }
             }
         }
     }
 }
+
