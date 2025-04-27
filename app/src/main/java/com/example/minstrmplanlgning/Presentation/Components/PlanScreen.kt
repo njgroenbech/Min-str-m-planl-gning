@@ -49,12 +49,6 @@ fun PlanScreen(onScreen2ButtonClick: () -> Unit = {}) {
 
                 BarChart()
 
-                ApplianceCard(
-                    applianceName = "Vaskemaskine",
-                    time = "14-17",
-                    onClick = onScreen2ButtonClick
-                )
-
                 Spacer(modifier = Modifier.height(24.dp))
             }
 
