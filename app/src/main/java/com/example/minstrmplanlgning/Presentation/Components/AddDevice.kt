@@ -62,29 +62,3 @@ fun AddDevice(
         }
     }
 }
-
-@Composable
-fun ApplianceButton(name: String, iconRes: Int, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .size(140.dp)
-            .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(id = iconRes),
-                contentDescription = name,
-                modifier = Modifier.size(80.dp)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = name, fontSize = 12.sp)
-        }
-    }
-}
