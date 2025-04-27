@@ -1,5 +1,6 @@
 package com.example.minstrmplanlgning
 
+import BottomNavigationBarUI
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,6 +29,8 @@ class MainActivity : ComponentActivity() {
                     fontSize = 20.sp
                 )
                 NavigateHomeAndScreen2()
+
+                BottomNavigationBarUI()
             }
         }
     }
