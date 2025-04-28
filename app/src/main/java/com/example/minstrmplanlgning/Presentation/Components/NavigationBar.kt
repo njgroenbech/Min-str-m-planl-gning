@@ -23,13 +23,13 @@ fun NavigationBar() {
     )
 
     Box(
-        modifier = Modifier.fillMaxSize() // Full screen box
+        modifier = Modifier.fillMaxSize()
     ) {
         Surface(
             tonalElevation = 8.dp,
             shadowElevation = 8.dp,
             modifier = Modifier
-                .align(Alignment.BottomCenter) // Center navbar at bottom of screen
+                .align(Alignment.BottomCenter)
         ) {
             Row(
                 modifier = Modifier
