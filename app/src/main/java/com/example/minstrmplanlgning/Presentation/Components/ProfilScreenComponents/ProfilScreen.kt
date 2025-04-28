@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.Presentation.Components
+package com.example.minstrmplanlgning.Presentation.Components.ProfilScreenComponents
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PriserScreen() {
+fun ProfilScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
