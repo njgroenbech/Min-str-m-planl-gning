@@ -11,7 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.domain.model.Appliance
-import com.example.minstrmplanlgning.R
 
 @Composable
 fun PlanScreen() {

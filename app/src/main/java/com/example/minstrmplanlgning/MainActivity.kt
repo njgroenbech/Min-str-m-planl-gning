@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             Scaffold(
                 bottomBar = { NavigationBar() }
             ) {
-                PlanScreen() // <-- Ingen modifier!
+                PlanScreen()
             }
         }
     }
