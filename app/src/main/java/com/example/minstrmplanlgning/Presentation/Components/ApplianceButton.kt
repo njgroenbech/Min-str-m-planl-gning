@@ -2,13 +2,7 @@ package com.example.minstrmplanlgning.Presentation.Components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -19,10 +13,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
-// inherits name, iconres and onclick from addDevice
 @Composable
-fun ApplianceButton(name: String, iconRes: Int, onClick: () -> Unit) {
+fun ApplianceButton(
+    name: String,
+    iconRes: Int,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .size(140.dp)
