@@ -43,6 +43,7 @@ fun NavigationBar(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .height(50.dp)
+                            // navigation between different screens in navBar
                             .clickable {
                                 navController.navigate(route) {
                                     popUpTo(navController.graph.startDestinationId) {
