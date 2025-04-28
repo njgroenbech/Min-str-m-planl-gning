@@ -7,7 +7,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Scaffold
-import com.example.minstrmplanlgning.Presentation.Components.PlanScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.minstrmplanlgning.Presentation.Navigation.ScreenNavigation
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -15,10 +16,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             Scaffold(
-                bottomBar = { NavigationBar() }
+                bottomBar = { NavigationBar(navController) }
             ) {
-                PlanScreen()
+                ScreenNavigation(navController)
             }
         }
     }

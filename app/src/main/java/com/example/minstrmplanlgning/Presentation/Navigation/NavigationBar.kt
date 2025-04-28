@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun NavigationBar() {
+fun NavigationBar(navController: NavController) {
     val navItems = listOf(
         Pair("Priser", Icons.Default.Search),
         Pair("Forbrug", Icons.Default.Search),
@@ -38,20 +39,27 @@ fun NavigationBar() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                navItems.forEach { (label, icon) ->
+                navItems.forEach { (route, icon) ->
                     Column(
                         modifier = Modifier
                             .height(50.dp)
-                            .clickable { /* No action now */ },
+                            .clickable {
+                                navController.navigate(route) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    restoreState = true
+                                }
+                            },
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Icon(
                             imageVector = icon,
-                            contentDescription = label,
+                            contentDescription = route,
                             tint = Color.Gray
                         )
                         Text(
-                            text = label,
+                            text = route,
                             fontSize = 12.sp,
                             color = Color.Gray
                         )
