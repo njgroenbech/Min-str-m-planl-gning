@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.Presentation.Components
+package com.example.minstrmplanlgning.Presentation.Components.PlanScreenComponents
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.Presentation.Components
+package com.example.minstrmplanlgning.Presentation.Components.PlanScreenComponents
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
