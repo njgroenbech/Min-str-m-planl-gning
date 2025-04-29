@@ -16,9 +16,11 @@ import com.example.minstrmplanlgning.domain.model.Appliance
 fun PlanScreen() {
     var appliances by remember { mutableStateOf(listOf<Appliance>()) }
     var showAddDeviceSheet by remember { mutableStateOf(false) }
+    var showAddDeviceSettingsSheet by remember { mutableStateOf(false) }
     var selectedApplianceName by remember { mutableStateOf("") }
     var selectedApplianceIconRes by remember { mutableStateOf(0) }
-    var showAddDeviceSettingsSheet by remember { mutableStateOf(false) }
+    var selectedApplianceDuration by remember { mutableStateOf("") }
+    var applianceBeingEdited by remember { mutableStateOf<Appliance?>(null) }
 
     Column(
         modifier = Modifier
@@ -45,7 +47,7 @@ fun PlanScreen() {
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF3B82F6),
-                    modifier = Modifier.padding(start = 32.dp, end = 98.dp)
+                    modifier = Modifier.padding(start = 32.dp, end = 120.dp)
                 )
                 Text(
                     text = "Kalender",
@@ -64,7 +66,19 @@ fun PlanScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(appliances) { appliance ->
-                    ApplianceCard(appliance)
+                    ApplianceCard(
+                        appliance = appliance,
+                        onDelete = { selectedAppliance ->
+                            appliances = appliances - selectedAppliance
+                        },
+                        onEdit = { selectedAppliance ->
+                            applianceBeingEdited = selectedAppliance
+                            selectedApplianceName = selectedAppliance.name
+                            selectedApplianceIconRes = selectedAppliance.iconRes
+                            selectedApplianceDuration = selectedAppliance.duration.orEmpty()
+                            showAddDeviceSettingsSheet = true
+                        }
+                    )
                 }
             }
         }
@@ -77,7 +91,7 @@ fun PlanScreen() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 80.dp) // Luft over NavigationBar
+                .padding(bottom = 80.dp)
         ) {
             Text(text = "TILFØJ APPARAT")
         }
@@ -98,16 +112,26 @@ fun PlanScreen() {
     if (showAddDeviceSettingsSheet) {
         AddDeviceSettings(
             applianceName = selectedApplianceName,
-            onSettingsSaved = { name, duration, time, repeat ->
-                val appliance = Appliance(
+            onSettingsSaved = { name, duration, _, _ ->
+                val newAppliance = Appliance(
                     name = name,
                     iconRes = selectedApplianceIconRes,
                     duration = "$duration timer"
                 )
-                appliances = appliances + appliance
+
+                applianceBeingEdited?.let { applianceToEdit ->
+                    appliances = appliances.map { if (it == applianceToEdit) newAppliance else it }
+                    applianceBeingEdited = null
+                } ?: run {
+                    appliances = appliances + newAppliance
+                }
+
                 showAddDeviceSettingsSheet = false
             },
-            onDismiss = { showAddDeviceSettingsSheet = false }
+            onDismiss = {
+                applianceBeingEdited = null
+                showAddDeviceSettingsSheet = false
+            }
         )
     }
 }
