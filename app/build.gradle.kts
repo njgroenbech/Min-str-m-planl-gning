@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -58,4 +59,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     val nav_version = "2.8.9"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
 }
