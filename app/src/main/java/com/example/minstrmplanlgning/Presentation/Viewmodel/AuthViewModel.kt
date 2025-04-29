@@ -1,12 +1,14 @@
 package com.example.minstrmplanlgning.Presentation.Viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.minstrmplanlgning.data.remote.AuthRequest
+import com.example.minstrmplanlgning.BuildConfig
 import com.example.minstrmplanlgning.data.remote.RetrofitClient
 import com.example.minstrmplanlgning.data.remote.dto.PriceResponseDK2
+import com.example.minstrmplanlgning.data.remote.utility.generateBearerToken
 import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
@@ -23,21 +25,20 @@ class AuthViewModel : ViewModel() {
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
 
-    fun authenticate(clientId: String, clientSecret: String) {
-        _isLoading.value = true
-        _error.value = ""
+    init {
+        generateToken()
+    }
 
-        viewModelScope.launch {
-            try {
-                val response = RetrofitClient.apiService.getAccessToken(
-                    AuthRequest(clientId = clientId, clientSecret = clientSecret)
-                )
-                _token.value = response.accessToken
-            } catch (e: Exception) {
-                _error.value = "Authentication failed: ${e.localizedMessage}"
-            } finally {
-                _isLoading.value = false
-            }
+    private fun generateToken() {
+        try {
+            val generatedToken = generateBearerToken(
+                BuildConfig.API_KEY,
+                BuildConfig.SECRET_KEY
+            )
+            _token.value = generatedToken // already includes "Bearer "
+            Log.d("TokenGeneration", "Generated Token: $generatedToken")
+        } catch (e: Exception) {
+            _error.value = "Failed to generate token: ${e.localizedMessage}"
         }
     }
 
@@ -52,10 +53,12 @@ class AuthViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val bearer = "Bearer ${_token.value}"
+                val bearer = _token.value
                 val response = RetrofitClient.apiService.getPrices(bearer, region)
                 _prices.value = response
+                Log.d("FetchPrices", "Prices loaded successfully.")
             } catch (e: Exception) {
+                Log.e("FetchPrices", "Error fetching prices", e)
                 _error.value = "Fetching prices failed: ${e.localizedMessage}"
             } finally {
                 _isLoading.value = false

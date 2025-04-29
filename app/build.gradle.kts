@@ -1,4 +1,16 @@
+import java.util.Properties
+import java.io.FileInputStream
 
+// Load the properties from local.properties
+val localProperties = Properties()
+localProperties.load(FileInputStream(rootProject.file("local.properties")))
+
+val apiKey: String? = localProperties.getProperty("API_KEY")
+val apiSecret: String? = localProperties.getProperty("SECRET_KEY")
+
+// Log the API_KEY and SECRET_KEY values to verify they are loaded
+println("API_KEY: $apiKey")
+println("SECRET_KEY: $apiSecret")
 
 plugins {
     alias(libs.plugins.android.application)
@@ -10,16 +22,22 @@ android {
     namespace = "com.example.minstrmplanlgning"
     compileSdk = 35
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.minstrmplanlgning"
         minSdk = 35
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "API_KEY", "\"${project.findProperty("API_KEY")}\"")
-        buildConfigField("String", "API_SECRET", "\"${project.findProperty("API_SECRET")}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // load api keys into BuildConfig
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+        buildConfigField("String", "SECRET_KEY", "\"$apiSecret\"")
     }
 
     buildTypes {
@@ -44,7 +62,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

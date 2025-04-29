@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.Presentation.Components.PriserScreenComponents
+package com.example.minstrmplanlgning.Presentation.Components.FindSelskabScreenComponents
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
