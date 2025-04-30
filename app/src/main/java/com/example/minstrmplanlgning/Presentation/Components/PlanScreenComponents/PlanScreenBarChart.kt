@@ -1,17 +1,9 @@
 package com.example.minstrmplanlgning.Presentation.Components.PlanScreenComponents
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,43 +11,64 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.minstrmplanlgning.domain.model.HourlyPrice
+import kotlin.math.roundToInt
 
 @Composable
-fun BarChart() {
-    val hours = (0..23).toList()
-    val barHeights = List(24) { (50..150).random() } // Fake data
-    val maxHeight = 150.dp
+fun BarChart(hourlyPrices: List<HourlyPrice>) {
+    val maxPrice = hourlyPrices.maxOfOrNull { it.price } ?: 1.0
+    val minPrice = hourlyPrices.minOfOrNull { it.price } ?: 0.0
+    val maxHeight = 200.dp
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 8.dp, vertical = 8.dp),
         verticalAlignment = Alignment.Bottom
     ) {
-        hours.forEachIndexed { index, hour ->
+        hourlyPrices.forEach { price ->
+            val heightFraction = (price.price - minPrice) / (maxPrice - minPrice).coerceAtLeast(0.01)
+            val barHeight = maxHeight * heightFraction.toFloat()
+            val barColor = getPriceColor(heightFraction)
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Bottom,
                 modifier = Modifier
-                    .height(maxHeight + 20.dp)
-                    .padding(horizontal = 4.dp)
+                    .height(maxHeight + 40.dp)
+                    .padding(horizontal = 2.dp)
             ) {
+                Text(
+                    text = "${price.price.roundToInt()} øre",
+                    fontSize = 9.sp
+                )
+
                 Box(
                     modifier = Modifier
-                        .width(12.dp)
-                        .height((barHeights[index].dp))
+                        .width(8.dp) // smallere søjle
+                        .height(barHeight)
                         .background(
-                            color = Color(0xFF3B82F6),
-                            shape = androidx.compose.foundation.shape.RoundedCornerShape(6.dp)
+                            color = barColor,
+                            shape = androidx.compose.foundation.shape.RoundedCornerShape(4.dp)
                         )
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+
+                Spacer(modifier = Modifier.height(2.dp))
+
                 Text(
-                    text = if (hour < 10) "0$hour" else "$hour",
-                    fontSize = 10.sp
+                    text = String.format("%02d", price.hour),
+                    fontSize = 9.sp
                 )
             }
         }
+    }
+}
+
+fun getPriceColor(fraction: Double): Color {
+    return when {
+        fraction < 0.33 -> Color(0xFF10B981) // grøn
+        fraction < 0.66 -> Color(0xFFF59E0B) // gul
+        else -> Color(0xFFEF4444)           // rød
     }
 }

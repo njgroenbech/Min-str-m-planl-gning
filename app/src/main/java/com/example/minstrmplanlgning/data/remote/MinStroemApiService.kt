@@ -1,5 +1,6 @@
 package com.example.minstrmplanlgning.data.remote
   
+import com.example.minstrmplanlgning.data.remote.dto.FullPriceCopenhagenResponse
 import com.example.minstrmplanlgning.data.remote.dto.PriceResponseDK2
 import retrofit2.http.*
 
