@@ -8,12 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.minstrmplanlgning.BuildConfig
 import com.example.minstrmplanlgning.data.remote.RetrofitClient
 import com.example.minstrmplanlgning.data.remote.dto.PriceResponseDK2
-import com.example.minstrmplanlgning.data.remote.utility.generateBearerToken
 import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
 
-    private val _token = mutableStateOf("")
+    private val _token = mutableStateOf(BuildConfig.BEARER_TOKEN)  // already includes "Bearer "
     val token: State<String> = _token
 
     private val _prices = mutableStateOf<List<PriceResponseDK2>>(emptyList())
@@ -25,26 +24,9 @@ class AuthViewModel : ViewModel() {
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
 
-    init {
-        generateToken()
-    }
-
-    private fun generateToken() {
-        try {
-            val generatedToken = generateBearerToken(
-                BuildConfig.API_KEY,
-                BuildConfig.SECRET_KEY
-            )
-            _token.value = generatedToken // already includes "Bearer "
-            Log.d("TokenGeneration", "Generated Token: $generatedToken")
-        } catch (e: Exception) {
-            _error.value = "Failed to generate token: ${e.localizedMessage}"
-        }
-    }
-
     fun fetchPrices(region: String = "DK2") {
         if (_token.value.isBlank()) {
-            _error.value = "Missing token, please authenticate first"
+            _error.value = "Missing token, please set BEARER_TOKEN in BuildConfig"
             return
         }
 
@@ -53,7 +35,7 @@ class AuthViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val bearer = _token.value
+                val bearer = "Bearer ${BuildConfig.BEARER_TOKEN}"
                 val response = RetrofitClient.apiService.getPrices(bearer, region)
                 _prices.value = response
                 Log.d("FetchPrices", "Prices loaded successfully.")

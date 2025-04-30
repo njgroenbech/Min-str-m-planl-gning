@@ -7,10 +7,7 @@ localProperties.load(FileInputStream(rootProject.file("local.properties")))
 
 val apiKey: String? = localProperties.getProperty("API_KEY")
 val apiSecret: String? = localProperties.getProperty("SECRET_KEY")
-
-// Log the API_KEY and SECRET_KEY values to verify they are loaded
-println("API_KEY: $apiKey")
-println("SECRET_KEY: $apiSecret")
+val bearerToken: String? = localProperties.getProperty("BEARER_TOKEN")
 
 plugins {
     alias(libs.plugins.android.application)
@@ -36,8 +33,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // load api keys into BuildConfig
-        buildConfigField("String", "API_KEY", "\"$apiKey\"")
-        buildConfigField("String", "SECRET_KEY", "\"$apiSecret\"")
+        buildConfigField("String", "API_KEY", "\"${apiKey ?: ""}\"")
+        buildConfigField("String", "SECRET_KEY", "\"${apiSecret ?: ""}\"")
+        buildConfigField("String", "BEARER_TOKEN", "\"${bearerToken ?: ""}\"")
     }
 
     buildTypes {

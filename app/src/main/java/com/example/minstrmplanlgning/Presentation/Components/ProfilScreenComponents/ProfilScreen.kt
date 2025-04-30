@@ -61,7 +61,6 @@ fun ProfilScreen() {
                             Column(modifier = Modifier.padding(16.dp)) {
                                 Text("Date: ${price.date}", style = MaterialTheme.typography.bodyLarge)
                                 Text("Price: ${price.price} øre", style = MaterialTheme.typography.bodyMedium)
-                                Text("Color: ${price.color}", style = MaterialTheme.typography.bodySmall)
                             }
                         }
                     }

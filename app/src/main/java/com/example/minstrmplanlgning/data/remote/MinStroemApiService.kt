@@ -11,4 +11,6 @@ interface MinStroemApiService {
         @Path("region") region: String
     ): List<PriceResponseDK2>
 
+
+
 }

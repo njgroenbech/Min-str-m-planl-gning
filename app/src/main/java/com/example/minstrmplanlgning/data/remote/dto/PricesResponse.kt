@@ -10,7 +10,4 @@ data class PriceResponseDK2 (
     @SerializedName("price")
     val price: Double,
 
-    @SerializedName("color")
-    val color: String
-
 )
