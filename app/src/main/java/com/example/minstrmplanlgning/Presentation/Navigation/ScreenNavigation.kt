@@ -1,6 +1,6 @@
 package com.example.minstrmplanlgning.Presentation.Navigation
 
-import Graphs
+import GraphsScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -33,7 +33,7 @@ fun ScreenNavigation(navController: NavHostController) {
             ProfilScreen()
         }
         composable("Graphs") {
-            Graphs(navController)
+            GraphsScreen(navController)
         }
     }
 }
