@@ -11,6 +11,7 @@ class ApplianceRepositoryImpl(
 
     override suspend fun addAppliance(appliance: ApplianceData): Result<Unit> {
         return try {
+
             db.collection("appliances")
                 .add(appliance)
                 .await() // gør kaldet suspenderbart
