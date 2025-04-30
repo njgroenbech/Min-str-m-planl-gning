@@ -14,6 +14,10 @@ import com.example.minstrmplanlgning.domain.model.Appliance
 import com.example.minstrmplanlgning.Presentation.Viewmodel.PlanViewModel
 import com.example.minstrmplanlgning.data.repository.ApplianceRepositoryImpl
 import com.example.minstrmplanlgning.domain.model.toApplianceData
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.minstrmplanlgning.Presentation.Viewmodel.AuthViewModel
+import com.example.minstrmplanlgning.data.mapper.toHourlyPrices
+
 
 @Composable
 fun PlanScreen() {
@@ -26,6 +30,15 @@ fun PlanScreen() {
     var applianceBeingEdited by remember { mutableStateOf<Appliance?>(null) }
 
     val viewModel = remember { PlanViewModel(ApplianceRepositoryImpl()) }
+
+    val authViewModel: AuthViewModel = viewModel()
+    val hourlyPrices = authViewModel.prices.value.toHourlyPrices()
+    val isLoading = authViewModel.isLoading.value
+    val error = authViewModel.error.value
+
+    LaunchedEffect(Unit) {
+        authViewModel.fetchPrices()
+    }
 
     Column(
         modifier = Modifier
@@ -61,7 +74,23 @@ fun PlanScreen() {
             }
 
             Spacer(modifier = Modifier.height(24.dp))
-            BarChart()
+
+            when {
+                isLoading -> {
+                    Text("Indlæser elpriser...")
+                }
+                error.isNotBlank() -> {
+                    Text("Fejl: $error", color = Color.Red)
+                }
+                hourlyPrices.isNotEmpty() -> {
+                    BarChart(hourlyPrices = hourlyPrices)
+                }
+                else -> {
+                    Text("Ingen elpriser tilgængelige.")
+                }
+            }
+
+
             Spacer(modifier = Modifier.height(24.dp))
 
             LazyColumn(
