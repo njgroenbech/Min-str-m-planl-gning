@@ -1,3 +1,14 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+// Load the properties from local.properties
+val localProperties = Properties()
+localProperties.load(FileInputStream(rootProject.file("local.properties")))
+
+val apiKey: String? = localProperties.getProperty("API_KEY")
+val apiSecret: String? = localProperties.getProperty("SECRET_KEY")
+val bearerToken: String? = localProperties.getProperty("BEARER_TOKEN")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,6 +19,10 @@ android {
     namespace = "com.example.minstrmplanlgning"
     compileSdk = 35
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.minstrmplanlgning"
         minSdk = 35
@@ -16,6 +31,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // load api keys into BuildConfig
+        buildConfigField("String", "API_KEY", "\"${apiKey ?: ""}\"")
+        buildConfigField("String", "SECRET_KEY", "\"${apiSecret ?: ""}\"")
+        buildConfigField("String", "BEARER_TOKEN", "\"${bearerToken ?: ""}\"")
     }
 
     buildTypes {
@@ -40,7 +60,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -49,6 +68,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
