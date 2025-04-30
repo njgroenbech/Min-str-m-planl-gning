@@ -16,8 +16,7 @@ import com.example.minstrmplanlgning.domain.useCase.ApplianceRepositoryImpl
 import com.example.minstrmplanlgning.domain.model.toApplianceData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.minstrmplanlgning.Presentation.Viewmodel.AuthViewModel
-import com.example.minstrmplanlgning.data.mapper.toHourlyPrices
-
+import com.example.minstrmplanlgning.domain.model.toFullHourlyPrices
 
 @Composable
 fun PlanScreen() {
@@ -32,12 +31,12 @@ fun PlanScreen() {
     val viewModel = remember { PlanViewModel(ApplianceRepositoryImpl()) }
 
     val authViewModel: AuthViewModel = viewModel()
-    val hourlyPrices = authViewModel.prices.value.toHourlyPrices()
+    val hourlyPrices = authViewModel.fullPrices.value.toFullHourlyPrices()
     val isLoading = authViewModel.isLoading.value
     val error = authViewModel.error.value
 
     LaunchedEffect(Unit) {
-        authViewModel.fetchPrices()
+        authViewModel.getFullPricesCopenhagen()
     }
 
     Column(

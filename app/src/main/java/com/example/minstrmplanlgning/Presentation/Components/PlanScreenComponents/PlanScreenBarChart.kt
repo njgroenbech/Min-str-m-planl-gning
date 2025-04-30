@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.domain.model.HourlyPrice
-import kotlin.math.roundToInt
 
 @Composable
 fun BarChart(hourlyPrices: List<HourlyPrice>) {
@@ -40,7 +39,7 @@ fun BarChart(hourlyPrices: List<HourlyPrice>) {
                     .padding(horizontal = 2.dp)
             ) {
                 Text(
-                    text = "${price.price.roundToInt()} øre",
+                    text = String.format("%.2f kr", price.price),
                     fontSize = 9.sp
                 )
 
