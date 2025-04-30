@@ -52,8 +52,6 @@ fun Graphs(navController: NavController) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            HouseholdComparisonCard()
-
 
             // space at bottom so LazyColumn matches the navbar
             Spacer(modifier = Modifier.height(90.dp))

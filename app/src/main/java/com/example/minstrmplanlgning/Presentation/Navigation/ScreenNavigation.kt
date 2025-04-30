@@ -6,10 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.minstrmplanlgning.Presentation.Components.FindSelskabScreenComponents.FindSelskabScreen
+import com.example.minstrmplanlgning.Presentation.Components.FindSelskabScreenComponents.PriserScreen
 import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenComponents.ForbrugScreen
 import com.example.minstrmplanlgning.Presentation.Components.PlanScreenComponents.PlanScreen
-import com.example.minstrmplanlgning.Presentation.Components.PriserScreenComponents.PriserScreen
-import com.example.minstrmplanlgning.Presentation.Components.ProfilScreenComponents.ProfilScreen
+import com.example.minstrmplanlgning.Presentation.Components.PriserScreenComponents.ProfilScreen
 
 @Composable
 fun ScreenNavigation(navController: NavHostController) {
