@@ -12,15 +12,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.minstrmplanlgning.domain.model.NavItem
 
 @Composable
 fun NavigationBar(navController: NavController) {
     val navItems = listOf(
-        Pair("Priser", Icons.Default.Search),
-        Pair("Forbrug", Icons.Default.Search),
-        Pair("Find selskab", Icons.Default.Search),
-        Pair("Planlæg", Icons.Default.List),
-        Pair("Profil", Icons.Default.Person)
+        NavItem("Priser", Icons.Default.Search),
+        NavItem("Forbrug", Icons.Default.Search),
+        NavItem("Find selskab", Icons.Default.Search),
+        NavItem("Planlæg", Icons.Default.List),
+        NavItem("Profil", Icons.Default.Person)
     )
 
     Box(
