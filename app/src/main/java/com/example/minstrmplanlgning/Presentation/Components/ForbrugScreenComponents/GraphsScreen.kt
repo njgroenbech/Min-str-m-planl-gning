@@ -12,7 +12,7 @@ import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenCompon
 import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenComponents.TilbageTilForbrugCard
 
 @Composable
-fun Graphs(navController: NavController) {
+fun GraphsScreen(navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
