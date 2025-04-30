@@ -1,4 +1,4 @@
-package com.example.minstrmplanlgning.data.repository
+package com.example.minstrmplanlgning.domain.useCase
 
 import com.example.minstrmplanlgning.domain.model.ApplianceData
 import com.example.minstrmplanlgning.domain.repository.ApplianceRepository
