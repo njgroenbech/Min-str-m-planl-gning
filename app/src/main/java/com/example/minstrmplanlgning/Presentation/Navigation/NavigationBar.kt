@@ -2,6 +2,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.sharp.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -13,14 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.minstrmplanlgning.domain.model.NavItem
+import androidx.compose.material.icons.filled.Bolt
 
 @Composable
 fun NavigationBar(navController: NavController) {
     val navItems = listOf(
-        NavItem("Priser", Icons.Default.Search),
-        NavItem("Forbrug", Icons.Default.Search),
-        NavItem("Find selskab", Icons.Default.Search),
-        NavItem("Planlæg", Icons.Default.List),
+        NavItem("Priser", Icons.Default.Bolt),
+        NavItem("Forbrug", Icons.Default.BarChart),
+        NavItem("Find selskab", Icons.Default.ImageSearch),
+        NavItem("Planlæg", Icons.Default.Menu),
         NavItem("Profil", Icons.Default.Person)
     )
 
