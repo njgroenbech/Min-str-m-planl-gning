@@ -1,22 +1,22 @@
 package com.example.minstrmplanlgning.data.remote
   
-import com.example.minstrmplanlgning.data.remote.dto.FullPriceCopenhagenResponse
-import com.example.minstrmplanlgning.data.remote.dto.PriceResponseDK2
+import com.example.minstrmplanlgning.data.remote.dto.FullPriceResponse
+import com.example.minstrmplanlgning.data.remote.dto.SpotPriceResponse
 import retrofit2.http.*
 
-interface MinStroemApiService {
+interface ApiService {
 
     @GET("thirdParty/prices/{region}")
     suspend fun getPrices(
         @Header("Authorization") authHeader: String,
         @Path("region") region: String
-    ): List<PriceResponseDK2>
+    ): List<SpotPriceResponse>
 
     @GET("thirdParty/prices/location")
     suspend fun getFullPriceForLocation(
         @Header("Authorization") authHeader: String,
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double
-    ): List<FullPriceCopenhagenResponse>
+    ): List<FullPriceResponse>
   
 }

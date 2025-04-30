@@ -32,7 +32,7 @@ fun AddDevice(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Vælg Apparat", fontSize = 28.sp)
+            Text(text = "Vælg enhed", fontSize = 28.sp)
             Spacer(modifier = Modifier.height(24.dp))
 
             Column {

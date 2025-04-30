@@ -6,18 +6,28 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.minstrmplanlgning.BuildConfig
-import com.example.minstrmplanlgning.data.remote.RetrofitClient
-import com.example.minstrmplanlgning.data.remote.dto.FullPriceCopenhagenResponse
-import com.example.minstrmplanlgning.data.remote.dto.PriceResponseDK2
+import com.example.minstrmplanlgning.data.remote.dto.FullPriceResponse
+import com.example.minstrmplanlgning.data.remote.dto.SpotPriceResponse
+import com.example.minstrmplanlgning.data.repository.ApiServiceRepository
+import com.example.minstrmplanlgning.data.repository.ApiServiceRepositoryImpl
+import com.example.minstrmplanlgning.data.useCase.GetFullPricesUseCase
+import com.example.minstrmplanlgning.data.useCase.GetSpotPricesUseCase
 import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
 
-    private val _token = mutableStateOf(BuildConfig.BEARER_TOKEN)  // already includes "Bearer "
+    private val _token = mutableStateOf(BuildConfig.BEARER_TOKEN)
     val token: State<String> = _token
 
-    private val _prices = mutableStateOf<List<PriceResponseDK2>>(emptyList())
-    val prices: State<List<PriceResponseDK2>> = _prices
+    private val priceRepository: ApiServiceRepository = ApiServiceRepositoryImpl()
+    private val getPricesUseCase = GetSpotPricesUseCase(priceRepository)
+    private val getFullPricesCopenhagenUseCase = GetFullPricesUseCase(priceRepository)
+
+    private val _prices = mutableStateOf<List<SpotPriceResponse>>(emptyList())
+    val prices: State<List<SpotPriceResponse>> = _prices
+
+    private val _fullPrices = mutableStateOf<List<FullPriceResponse>>(emptyList())
+    val fullPrices: State<List<FullPriceResponse>> = _fullPrices
 
     private val _error = mutableStateOf("")
     val error: State<String> = _error
@@ -25,7 +35,6 @@ class AuthViewModel : ViewModel() {
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
 
-    // fetch spot prices
     fun fetchPrices(region: String = "DK2") {
         if (_token.value.isBlank()) {
             _error.value = "Missing token, please set BEARER_TOKEN in BuildConfig"
@@ -36,30 +45,18 @@ class AuthViewModel : ViewModel() {
         _error.value = ""
 
         viewModelScope.launch {
-            try {
-                val bearer = "Bearer ${BuildConfig.BEARER_TOKEN}"
-                val response = RetrofitClient.apiService.getPrices(bearer, region)
-                _prices.value = response
-                Log.d("FetchPrices", "Prices loaded successfully.")
-            } catch (e: Exception) {
-                Log.e("FetchPrices", "Error fetching prices", e)
-                _error.value = "Fetching prices failed: ${e.localizedMessage}"
-            } finally {
-                _isLoading.value = false
-            }
+            getPricesUseCase(region)
+                .onSuccess { response ->
+                    _prices.value = response
+                    Log.d("FetchPrices", "Prices loaded successfully.")
+                }
+                .onFailure { e ->
+                    Log.e("FetchPrices", "Error fetching prices", e)
+                    _error.value = "Fetching prices failed: ${e.localizedMessage}"
+                }
+            _isLoading.value = false
         }
     }
-
-
-
-    // fetch full prices for copenhagen
-
-    private val latitude = 55.6761
-    private val longitude = 12.5683
-
-    private val _fullPrices = mutableStateOf<List<FullPriceCopenhagenResponse>>(emptyList())
-    val fullPrices: State<List<FullPriceCopenhagenResponse>> = _fullPrices
-
 
     fun getFullPricesCopenhagen() {
         if (_token.value.isBlank()) {
@@ -70,29 +67,19 @@ class AuthViewModel : ViewModel() {
         _isLoading.value = true
         _error.value = ""
 
-        val latitude = 55.6761
-        val longitude = 12.5683
-
         viewModelScope.launch {
-            try {
-                val bearer = "Bearer ${BuildConfig.BEARER_TOKEN}"
-                val response = RetrofitClient.apiService.getFullPriceForLocation(
-                    authHeader = bearer,
-                    latitude = latitude,
-                    longitude = longitude
-                )
-                _fullPrices.value = response // ✅ Set the response here
-                Log.d("FullPrices", "Prices: $response")
-            } catch (e: Exception) {
-                Log.e("FullPrices", "Error fetching full prices", e)
-                _error.value = "Fetching full prices failed: ${e.localizedMessage}"
-            } finally {
-                _isLoading.value = false
-            }
+            getFullPricesCopenhagenUseCase(55.6761, 12.5683)
+                .onSuccess { response ->
+                    _fullPrices.value = response
+                    Log.d("FullPrices", "Prices: $response")
+                }
+                .onFailure { e ->
+                    Log.e("FullPrices", "Error fetching full prices", e)
+                    _error.value = "Fetching full prices failed: ${e.localizedMessage}"
+                }
+            _isLoading.value = false
         }
     }
-
-
 
     fun clearError() {
         _error.value = ""

@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.domain.model.Appliance
 import com.example.minstrmplanlgning.Presentation.Viewmodel.PlanViewModel
-import com.example.minstrmplanlgning.data.repository.ApplianceRepositoryImpl
+import com.example.minstrmplanlgning.domain.useCase.ApplianceRepositoryImpl
 import com.example.minstrmplanlgning.domain.model.toApplianceData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.minstrmplanlgning.Presentation.Viewmodel.AuthViewModel
@@ -125,7 +125,7 @@ fun PlanScreen() {
                 .fillMaxWidth()
                 .padding(bottom = 80.dp)
         ) {
-            Text(text = "TILFØJ APPARAT")
+            Text(text = "TILFØJ ENHED")
         }
     }
 

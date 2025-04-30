@@ -12,10 +12,11 @@ import androidx.compose.ui.Alignment
 @Composable
 fun BarChart() {
     val barWidth = 60.dp
-    val maxHeight = 200.dp // Maximum height the tallest bar can reach
+    val maxHeight = 200.dp // max height of bars
 
-    val greenBarHeightRatio = 0.7f // 70% of max height
-    val redBarHeightRatio = 0.5f   // 50% of max height
+    // hardcoded values
+    val greenBarHeightRatio = 0.7f
+    val redBarHeightRatio = 0.5f
 
     Row(
         modifier = Modifier

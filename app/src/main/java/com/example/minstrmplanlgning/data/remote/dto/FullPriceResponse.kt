@@ -2,7 +2,7 @@ package com.example.minstrmplanlgning.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class FullPriceCopenhagenResponse (
+data class FullPriceResponse (
 
     @SerializedName("date")
     val date: String,
