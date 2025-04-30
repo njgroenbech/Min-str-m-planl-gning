@@ -11,6 +11,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.domain.model.Appliance
+import com.example.minstrmplanlgning.Presentation.Viewmodel.PlanViewModel
+import com.example.minstrmplanlgning.data.repository.ApplianceRepositoryImpl
+import com.example.minstrmplanlgning.domain.model.toApplianceData
 
 @Composable
 fun PlanScreen() {
@@ -21,6 +24,8 @@ fun PlanScreen() {
     var selectedApplianceIconRes by remember { mutableStateOf(0) }
     var selectedApplianceDuration by remember { mutableStateOf("") }
     var applianceBeingEdited by remember { mutableStateOf<Appliance?>(null) }
+
+    val viewModel = remember { PlanViewModel(ApplianceRepositoryImpl()) }
 
     Column(
         modifier = Modifier
@@ -56,9 +61,7 @@ fun PlanScreen() {
             }
 
             Spacer(modifier = Modifier.height(24.dp))
-
             BarChart()
-
             Spacer(modifier = Modifier.height(24.dp))
 
             LazyColumn(
@@ -118,6 +121,8 @@ fun PlanScreen() {
                     iconRes = selectedApplianceIconRes,
                     duration = "$duration timer"
                 )
+
+                viewModel.addAppliance(newAppliance.toApplianceData())
 
                 applianceBeingEdited?.let { applianceToEdit ->
                     appliances = appliances.map { if (it == applianceToEdit) newAppliance else it }
