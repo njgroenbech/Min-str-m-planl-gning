@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.minstrmplanlgning" />
-                  <option name="mobileSdkAppId" value="1:217561647372:android:10cb52fe757cb88196e129" />
-                  <option name="projectId" value="min-strom-3c9de" />
-                  <option name="projectNumber" value="217561647372" />
+                  <option name="mobileSdkAppId" value="1:626331663698:android:2b319922fd46360b11ce8b" />
+                  <option name="projectId" value="min-strom-31260" />
+                  <option name="projectNumber" value="626331663698" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
