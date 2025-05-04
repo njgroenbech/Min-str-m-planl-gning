@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+// Nicholas
+
 @Composable
 fun PriserScreenBarChart(
     labels: List<String>,

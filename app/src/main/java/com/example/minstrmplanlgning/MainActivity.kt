@@ -23,15 +23,6 @@ class MainActivity : ComponentActivity() {
             ) {
                 ScreenNavigation(navController)
             }
-
-            fun main() {
-                // Log the key to Logcat
-                Log.d("API_KEY", BuildConfig.API_KEY ?: "API_KEY is null")
-                Log.d("SECRET_KEY", BuildConfig.SECRET_KEY ?: "API_SECRET is null")
-
-            }
-
-            main()
         }
     }
 }

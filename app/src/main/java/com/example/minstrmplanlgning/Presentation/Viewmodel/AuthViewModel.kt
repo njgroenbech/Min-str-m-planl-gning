@@ -14,7 +14,9 @@ import com.example.minstrmplanlgning.data.useCase.GetFullPricesUseCase
 import com.example.minstrmplanlgning.data.useCase.GetSpotPricesUseCase
 import kotlinx.coroutines.launch
 
-class AuthViewModel : ViewModel() {
+// Nicholas lavede denne viewmodel
+
+class PriceViewModel : ViewModel() {
 
     private val _token = mutableStateOf(BuildConfig.BEARER_TOKEN)
     val token: State<String> = _token

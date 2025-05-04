@@ -6,6 +6,8 @@ import com.example.minstrmplanlgning.domain.model.ApplianceData
 import com.example.minstrmplanlgning.domain.repository.ApplianceRepository
 import kotlinx.coroutines.launch
 
+// Jacob lavede denne viewmodel
+
 class PlanViewModel(
     private val repository: ApplianceRepository
 ) : ViewModel() {

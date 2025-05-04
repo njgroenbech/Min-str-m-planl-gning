@@ -13,6 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.domain.model.HourlyPrice
 
+// Jacob har arbejdet på det her
+
 @Composable
 fun BarChart(hourlyPrices: List<HourlyPrice>) {
     val maxPrice = hourlyPrices.maxOfOrNull { it.price } ?: 1.0

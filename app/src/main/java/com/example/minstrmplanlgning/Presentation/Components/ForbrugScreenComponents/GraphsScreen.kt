@@ -11,6 +11,8 @@ import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenCompon
 import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenComponents.PercentageSavedCard
 import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenComponents.TilbageTilForbrugCard
 
+// Nicholas
+
 @Composable
 fun GraphsScreen(navController: NavController) {
     LazyColumn(
@@ -27,10 +29,9 @@ fun GraphsScreen(navController: NavController) {
                     .fillMaxWidth()
                     .height(56.dp) // height for header area
             ) {
-                // Back button at start
                 TilbageTilForbrugCard(
                     onClickNavigation = {
-                        navController.navigate("Forbrug")
+                        navController.navigate("Forbrug") // naviger tilbage til forbrugscreen
                     },
                 )
 

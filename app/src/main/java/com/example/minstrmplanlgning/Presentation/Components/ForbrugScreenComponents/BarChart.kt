@@ -9,6 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 
+// Nicholas
+
 @Composable
 fun BarChart() {
     val barWidth = 60.dp

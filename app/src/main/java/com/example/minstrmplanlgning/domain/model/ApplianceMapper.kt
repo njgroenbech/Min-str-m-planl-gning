@@ -1,5 +1,7 @@
 package com.example.minstrmplanlgning.domain.model
 
+// Jacob
+
 fun Appliance.toApplianceData(): ApplianceData {
     return ApplianceData(
         name = this.name,

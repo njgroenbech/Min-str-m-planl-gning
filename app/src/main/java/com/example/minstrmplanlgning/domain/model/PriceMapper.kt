@@ -1,5 +1,7 @@
 package com.example.minstrmplanlgning.domain.model
 
+// Jacob øverste, nicholas nederste
+
 import com.example.minstrmplanlgning.data.remote.dto.FullPriceResponse
 import com.example.minstrmplanlgning.data.remote.dto.SpotPriceResponse
 import java.time.ZonedDateTime
