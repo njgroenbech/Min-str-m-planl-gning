@@ -4,6 +4,8 @@ import com.example.minstrmplanlgning.BuildConfig
 import com.example.minstrmplanlgning.data.remote.dto.FullPriceResponse
 import com.example.minstrmplanlgning.data.repository.ApiServiceRepository
 
+// Nicholas
+
 class GetFullPricesUseCase(private val priceRepository: ApiServiceRepository) {
     suspend operator fun invoke(latitude: Double, longitude: Double): Result<List<FullPriceResponse>> {
         return try {

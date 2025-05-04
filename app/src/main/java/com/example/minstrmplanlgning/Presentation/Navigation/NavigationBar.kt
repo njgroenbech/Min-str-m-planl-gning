@@ -17,6 +17,9 @@ import androidx.navigation.NavController
 import com.example.minstrmplanlgning.domain.model.NavItem
 import androidx.compose.material.icons.filled.Bolt
 
+
+// Nicholas har arbejdet på navigation
+
 @Composable
 fun NavigationBar(navController: NavController) {
     val navItems = listOf(
@@ -47,13 +50,16 @@ fun NavigationBar(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .height(50.dp)
-                            // navigation between different screens in navBar
-                            .clickable {
-                                navController.navigate(route) {
-                                    popUpTo(navController.graph.startDestinationId) {
-                                        saveState = true
+                            .clickable { // navigation between different screens in navBar
+                                // check if you're not already on the same screen you're clicking on
+                                if (navController.currentDestination?.route != route) {
+                                    navController.navigate(route) {
+                                        popUpTo(navController.graph.startDestinationId) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
                                     }
-                                    restoreState = true
                                 }
                             },
                         horizontalAlignment = Alignment.CenterHorizontally

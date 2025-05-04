@@ -11,6 +11,9 @@ import com.example.minstrmplanlgning.Presentation.Components.ForbrugScreenCompon
 import com.example.minstrmplanlgning.Presentation.Components.PlanScreenComponents.PlanScreen
 import com.example.minstrmplanlgning.Presentation.Components.PriserScreenComponents.ProfilScreen
 
+
+// Nicholas har arbejdet på navigation
+
 @Composable
 fun ScreenNavigation(navController: NavHostController) {
     NavHost(

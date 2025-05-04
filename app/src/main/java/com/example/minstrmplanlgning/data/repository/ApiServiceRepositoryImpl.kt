@@ -4,6 +4,8 @@ import com.example.minstrmplanlgning.data.remote.RetrofitClient
 import com.example.minstrmplanlgning.data.remote.dto.FullPriceResponse
 import com.example.minstrmplanlgning.data.remote.dto.SpotPriceResponse
 
+// Nicholas
+
 class ApiServiceRepositoryImpl : ApiServiceRepository {
     override suspend fun getPrices(authHeader: String, region: String): List<SpotPriceResponse> {
         return RetrofitClient.apiService.getPrices(authHeader, region)

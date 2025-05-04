@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
+// Nicholas
+
 @Composable
 fun ForbrugScreen(navController: NavController) {
     Column(

@@ -3,6 +3,8 @@ package com.example.minstrmplanlgning.data.remote
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// Nicholas
+
 object RetrofitClient {
     private const val BASE_URL = "https://api.minstroem.app/"
 

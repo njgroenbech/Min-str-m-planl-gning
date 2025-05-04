@@ -10,6 +10,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
+// Dummy screen, nicholas
+
 @Composable
 fun FindSelskabScreen() {
     Box(

@@ -7,20 +7,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.minstrmplanlgning.Presentation.Components.PriserScreenComponents.PriserScreenBarChart
 import com.example.minstrmplanlgning.Presentation.Components.PriserScreenComponents.PriserScreenCardForChart
-import com.example.minstrmplanlgning.Presentation.Viewmodel.AuthViewModel
+import com.example.minstrmplanlgning.Presentation.Viewmodel.PriceViewModel
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
+// Priser forside, ikke færdigt // Nicholas
+
 @Composable
 fun PriserScreen() {
-    val viewModel: AuthViewModel = viewModel()
+    val viewModel: PriceViewModel = viewModel()
 
     val fullPrices by viewModel.fullPrices
     val token by viewModel.token
@@ -37,7 +36,7 @@ fun PriserScreen() {
     when {
         isLoading -> {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+                CircularProgressIndicator() // trigger progress loader
             }
         }
 
@@ -61,7 +60,7 @@ fun PriserScreen() {
 
             val values = fullPrices.map { (it.price + (it.charges ?: 0.0)).toFloat() }
 
-            // 🧱 Add spacing and padding to avoid being hidden
+            // added spacing
             Column(
                 modifier = Modifier
                     .fillMaxSize()

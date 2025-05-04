@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+// Nicholas
+
 @Composable
 fun TilbageTilForbrugCard(onClickNavigation: () -> Unit) {
     Card(
@@ -23,8 +25,8 @@ fun TilbageTilForbrugCard(onClickNavigation: () -> Unit) {
         ),
         modifier = Modifier
             .wrapContentHeight()
-            .clickable { // Card is clickable
-                onClickNavigation()
+            .clickable {
+                onClickNavigation() // Make the card clickable
             }
     ) {
         Column(

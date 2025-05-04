@@ -15,8 +15,10 @@ import com.example.minstrmplanlgning.Presentation.Viewmodel.PlanViewModel
 import com.example.minstrmplanlgning.domain.useCase.ApplianceRepositoryImpl
 import com.example.minstrmplanlgning.domain.model.toApplianceData
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.minstrmplanlgning.Presentation.Viewmodel.AuthViewModel
+import com.example.minstrmplanlgning.Presentation.Viewmodel.PriceViewModel
 import com.example.minstrmplanlgning.domain.model.toFullHourlyPrices
+
+// Jacob har arbejdet i denne composable
 
 @Composable
 fun PlanScreen() {
@@ -30,13 +32,13 @@ fun PlanScreen() {
 
     val viewModel = remember { PlanViewModel(ApplianceRepositoryImpl()) }
 
-    val authViewModel: AuthViewModel = viewModel()
-    val hourlyPrices = authViewModel.fullPrices.value.toFullHourlyPrices()
-    val isLoading = authViewModel.isLoading.value
-    val error = authViewModel.error.value
+    val priceViewModel: PriceViewModel = viewModel()
+    val hourlyPrices = priceViewModel.fullPrices.value.toFullHourlyPrices()
+    val isLoading = priceViewModel.isLoading.value
+    val error = priceViewModel.error.value
 
     LaunchedEffect(Unit) {
-        authViewModel.getFullPricesCopenhagen()
+        priceViewModel.getFullPricesCopenhagen()
     }
 
     Column(

@@ -8,6 +8,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 
+// Nicholas
+
 @Composable
 fun GaugeMeter(percentage: Float) {
     Canvas(

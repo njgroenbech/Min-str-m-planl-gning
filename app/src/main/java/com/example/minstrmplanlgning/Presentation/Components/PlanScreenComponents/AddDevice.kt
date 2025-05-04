@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.minstrmplanlgning.R
 
+// Jacob
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddDevice(
